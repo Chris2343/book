@@ -1,0 +1,164 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Now Record</title>
+    <style>
+
+
+
+        /* Style for the table */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            
+        }
+
+        h1 {
+            text-align: center;
+            color: #173141;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+           
+
+           
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        /* Style for the list */
+        ul {
+            list-style: none;
+            padding: 0;
+          
+        }
+
+        li {
+            margin: 5px 0;
+            padding: 10px;
+            background-color: #f2f2f2;
+            border: 1px solid #ddd;
+        }
+
+
+
+        .navbar {
+            background-color: #173141;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .navbar a {
+            float: left;
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        .navbar a:hover {
+            background-color: #122833;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <a href="index.html">Home</a>
+        <a href="a">About Us</a>
+        <a href="demo.html">book</a>
+        
+        <a href="WINDOW WASHING SERVICE AGREEMENT.pdf" target="_blank" class="btn">Contract</a>
+    </div>
+    <div class="container">
+        <h1>Book Now Records</h1>
+        <!-- Use a table for displaying submitted data -->
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone </th>
+                <th>Service Type</th>
+                <th>Preferred Time of Day</th>
+            </tr>
+            <tr>
+                <td id="name"></td>
+                <td id="email"></td>
+                <td id="phone"></td>
+                <td id="serviceType"></td>
+                <td id="timeOfDay"></td>
+            </tr>
+        </table>
+
+        <!-- Use an unordered list to display submitted data -->
+        
+        <ul id="submittedData"></ul>
+    </div>
+
+    <script>
+ // Function to parse URL query parameters
+ function getUrlParams() {
+            const params = {};
+            window.location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(match, key, value) {
+                params[key] = decodeURIComponent(value);
+            });
+            return params;
+        }
+
+        // Retrieve data from URL query parameters
+        const urlParams = getUrlParams();
+
+        if (Object.keys(urlParams).length > 0) {
+            // Data is present in the URL query parameters, populate the table and list
+            const nameElement = document.createElement("td");
+            nameElement.textContent = urlParams.name || "";
+            const emailElement = document.createElement("td");
+            emailElement.textContent = urlParams.email || "";
+            const phoneElement = document.createElement("td");
+            phoneElement.textContent = urlParams.phone || "";
+            const serviceTypeElement = document.createElement("td");
+            serviceTypeElement.textContent = urlParams.serviceType || "";
+            const timeOfDayElement = document.createElement("td");
+            timeOfDayElement.textContent = urlParams.timeOfDay || "";
+
+            // Add the table row with data
+            const table = document.querySelector("table");
+            const tableRow = document.createElement("tr");
+            tableRow.appendChild(nameElement);
+            tableRow.appendChild(emailElement);
+            tableRow.appendChild(phoneElement);
+            tableRow.appendChild(serviceTypeElement);
+            tableRow.appendChild(timeOfDayElement);
+            table.querySelector("tbody").appendChild(tableRow);
+
+            // Create a new list item to display the submitted data
+            const submittedDataList = document.getElementById("submittedData");
+            const listItem = document.createElement("li");
+            listItem.textContent = `Name: ${urlParams.name || ""}, Email: ${urlParams.email || ""}, Phone: ${urlParams.phone || ""}, Service Type: ${urlParams.serviceType || ""}, Preferred Time of Day: ${urlParams.timeOfDay || ""}`;
+            submittedDataList.appendChild(listItem);
+        } else {
+            // Handle the case when there are no URL query parameters
+            const submittedDataList = document.getElementById("submittedData");
+            submittedDataList.innerHTML = "<li>No data has been submitted yet.</li>";
+        }
+
+    </script>
+</body>
+</html>
+
